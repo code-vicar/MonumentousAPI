@@ -1,2 +1,2 @@
 # Monumentous
-### a Sails application
+### a Sails application (sailsjs.org)

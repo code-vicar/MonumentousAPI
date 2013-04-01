@@ -1,8 +1,8 @@
 {
     "name": "Monumentous",
     "private": true,
-    "version": "0.0.0",
-    "description": "a Sails application",
+    "version": "1.0.0",
+    "description": "Scott Vicker's personal website",
     "dependencies": {
         "sails": "0.8.895"
     },
@@ -11,7 +11,6 @@
         "debug": "node debug .app.js"
     },
     "main": ".app.js",
-    "repository": "",
-    "author": "",
-    "license": "MIT"
+    "repository": "git@bitbucket.org:code_vicar/monumentous.git",
+    "author": "Scott Vickers"
 }
