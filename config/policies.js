@@ -5,17 +5,24 @@
 */
 module.exports.policies = {
 
-	// Default policy (allow public access)
-	'*': true
+  // Default policy (allow public access)
+  '*': true,
 
-	/** Example mapping: 
-	someController: {
+  // 'user': {
+  //   '*': 'authenticated',
+  //   'findAll': true,
+  //   'find': true,
+  //   'index': true
+  // }
 
-		// Apply the "authenticated" policy to all actions
-		'*': 'authenticated',
+  /** Example mapping: 
+  someController: {
 
-		// For someAction, apply 'somePolicy' instead
-		someAction: 'somePolicy'
-	}
-	*/
+    // Apply the "authenticated" policy to all actions
+    '*': 'authenticated',
+
+    // For someAction, apply 'somePolicy' instead
+    someAction: 'somePolicy'
+  }
+  */
 };

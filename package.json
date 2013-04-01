@@ -4,7 +4,8 @@
     "version": "1.0.0",
     "description": "Scott Vicker's personal website",
     "dependencies": {
-        "sails": "0.8.895"
+        "sails": "0.8.895",
+        "sails-mysql": "~0.7.7"
     },
     "scripts": {
         "start": "node .app.js",
