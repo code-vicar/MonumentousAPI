@@ -7,7 +7,7 @@ module.exports = {
 	attributes	: {
 
 		// Simple attribute:
-		name: 'STRING',
+		username: 'STRING',
 		email: 'STRING'
 
 		// Or for more flexibility:
