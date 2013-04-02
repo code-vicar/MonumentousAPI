@@ -4,8 +4,11 @@
     "version": "1.0.0",
     "description": "Scott Vicker's personal website",
     "dependencies": {
-        "sails": "0.8.895",
-        "sails-mysql": "~0.7.7"
+        "sails": "0.8.9-pre",
+        "sails-mysql": "~0.7.7",
+        "coffee-script": "~1.6.2",
+        "db-migrate": "~0.4.1",
+        "mysql": "~2.0.0-alpha7"
     },
     "scripts": {
         "start": "node .app.js",
