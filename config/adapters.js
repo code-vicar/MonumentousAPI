@@ -7,7 +7,7 @@ module.exports.adapters = {
 	// If you leave the adapter config unspecified 
 	// in a model definition, 'default' will be used.
 	'default': "memory",
-	
+
 	// In-memory adapter for DEVELOPMENT ONLY
 	// (data is NOT preserved when the server shuts down)
 	memory: {
@@ -30,6 +30,7 @@ module.exports.adapters = {
 	// Learn more: http://en.wikipedia.org/wiki/MySQL
 	mysql: {
 		module		: 'sails-mysql',
-		host		: 'localhost'
+		host		: 'localhost',
+		migrate     : 'safe'
 	}
 };
