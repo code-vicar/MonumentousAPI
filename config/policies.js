@@ -6,23 +6,27 @@
 module.exports.policies = {
 
   // Default policy (allow public access)
-  '*': true,
+  '*': 'authenticated',
 
-  // 'user': {
-  //   '*': 'authenticated',
-  //   'findAll': true,
-  //   'find': true,
-  //   'index': true
-  // }
+  'home': {
+    '*': true
+  },
 
-  /** Example mapping: 
-  someController: {
+  'user': {
+    'login': true
+  },
 
-    // Apply the "authenticated" policy to all actions
-    '*': 'authenticated',
+  // need to be signed in to Create a comment
+  //   only the author of a comment
+  'comment': {
+    'create': 'author',
+    'destroy': 'author',
+    'update': 'author'
+  },
 
-    // For someAction, apply 'somePolicy' instead
-    someAction: 'somePolicy'
+  'post': {
+    'create': 'author',
+    'destroy': 'author',
+    'update': 'author'
   }
-  */
 };

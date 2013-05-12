@@ -1,7 +1,7 @@
 module.exports = {
 	
 	// Name of the application (used as default <title>)
-	appName: "Monumentous",
+	appName: "Monumentous API",
 
 	// Port this Sails application will live on
 	port: 1337,

@@ -25,6 +25,21 @@ module.exports.routes = {
 	// To route the home page to the "index" action of the "home" controller:
 	'/' : {
 		controller	: 'home'
+	},
+
+	'post /user/login': {
+		controller  :  'user',
+		action      :  'login'
+	},
+
+	'post /user/logout': {
+		controller  :  'user',
+		action      :  'logout'
+	},
+
+	'put /comment/:id/vote': {
+		controller  :  'comment',
+		action      :  'vote'
 	}
 
 	// If you want to set up a route only for a particular HTTP method/verb 
