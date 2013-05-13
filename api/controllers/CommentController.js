@@ -12,7 +12,6 @@ var CommentController = {
 			return res.send("invalid params", 400);
 		}
 
-
 		var postid = req.param('postid');
 		if (typeof postid !== 'string') {
 			return res.send("invalid params", 400);

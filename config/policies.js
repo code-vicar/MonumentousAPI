@@ -13,20 +13,24 @@ module.exports.policies = {
   },
 
   'user': {
-    'login': true
+    'create': true,
+    'login': true,
+    'update': 'self',
+    'destroy': 'admin',
+    'find': 'admin',
+    'findAll': 'admin'
   },
 
   // need to be signed in to Create a comment
   //   only the author of a comment
   'comment': {
-    'create': 'author',
-    'destroy': 'author',
-    'update': 'author'
+    'destroy': 'commentAuthor',
+    'update': 'commentAuthor'
   },
 
   'post': {
-    'create': 'author',
-    'destroy': 'author',
-    'update': 'author'
+    'create': 'admin',
+    'destroy': 'admin',
+    'update': 'admin'
   }
 };

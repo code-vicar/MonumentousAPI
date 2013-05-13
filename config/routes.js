@@ -27,20 +27,20 @@ module.exports.routes = {
 		controller	: 'home'
 	},
 
-	'post /user/login': {
-		controller  :  'user',
-		action      :  'login'
-	},
+	// 'post /user/login': {
+	// 	controller  :  'user',
+	// 	action      :  'login'
+	// },
 
-	'post /user/logout': {
-		controller  :  'user',
-		action      :  'logout'
-	},
+	// 'post /user/logout': {
+	// 	controller  :  'user',
+	// 	action      :  'logout'
+	// },
 
-	'put /comment/:id/vote': {
-		controller  :  'comment',
-		action      :  'vote'
-	}
+	// 'put /comment/:id/vote': {
+	// 	controller  :  'comment',
+	// 	action      :  'vote'
+	// }
 
 	// If you want to set up a route only for a particular HTTP method/verb 
 	// (GET, POST, PUT, DELETE) you can specify the verb before the path:
