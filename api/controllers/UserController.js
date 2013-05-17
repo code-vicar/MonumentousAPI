@@ -1,3 +1,4 @@
+var uuid = require('node-uuid');
 /*---------------------
 	:: User 
 	-> controller
@@ -9,15 +10,23 @@ var UserController = {
 		var password = req.param('password');
 		var email = req.param('email');
 
+		if (!username || !password) {
+			var invalidParams = StandardResponses.BadRequest();
+			return res.send(invalidParams, invalidParams.statusCode);
+		}
+
 		//username must be unique
-		User.findByEmail(email).done(function(err, usr) {
+		User.findByUsername(username).done(function(err, usr) {
 			if (usr) {
-				return res.send("that email is already in use", 400);
+				var deniedName = StandardResponses.Conflict({msg:"That name is already in use."});
+				return res.send(deniedName, deniedName.statusCode);
 			}
 
 			User.hashPassword(password, function(err, hash) {
+				var ISE;
 				if (err) {
-					return res.send("server error", 500);
+					ISE = StandardResponses.ServerError({dat:err});
+					return res.send(ISE, ISE.statusCode);
 				}
 				User.create({
 					username:username,
@@ -25,10 +34,12 @@ var UserController = {
 					email:email
 				}).done(function(err, usr) {
 					if (err) {
-						return res.send("server error", 500);
+						ISE = StandardResponses.ServerError({dat:err});
+						return res.send(ISE, ISE.statusCode);
 					}
 
-					return res.send("created user", 200);
+					var rUsr = StandardResponses.Created({msg:"User created",dat:usr});
+					return res.send(rUsr,rUsr.statusCode);
 				});
 			});
 		});
@@ -38,35 +49,51 @@ var UserController = {
 		var username = req.param('username');
 		var password = req.param('password');
 
-		if (typeof username !== 'string') {
-			return res.send("invalid params", 400);
-		}
-
-		if (typeof password !== 'string') {
-			return res.send("invalid params", 400);
+		if (!username || !password) {
+			var invalidParams = StandardResponses.BadRequest();
+			return res.send(invalidParams, invalidParams.statusCode);
 		}
 
 		User.authenticate(username, password, function(err, data) {
+			var ISE;
 			if (err) {
-				return res.send({title:"server error", error:err}, 500);
+				ISE = StandardResponses.ServerError({dat:err});
+				return res.send(ISE, ISE.statusCode);
 			}
-			req.session.authenticated = data.authenticated;
-			req.session.user = data.user;
-			req.session.user.admin = (data.user.email === 'scott.w.vickers@gmail.com');
-
-			if (data.authenticated) {
-				return res.send("logged in", 200);
+			
+			if (!data.authenticated) {
+				var failAuth = StandardResponses.BadRequest({msg:"incorrect username or password"});
+				return res.send(failAuth,failAuth.statusCode);
 			}
 
-			//failed login attempt
-			return res.send('incorrect login information', 401);
+			Token.findByUserid(data.user.id).done(function(err, tkn){
+				if (err) {
+					ISE = StandardResponses.ServerError({dat:err});
+					return res.send(ISE, ISE.statusCode);
+				}
+
+				var pub = "";
+				if (tkn) {
+					var authed = StandardResponses.OK({msg:"authentication successful", dat:tkn});
+					return res.send(authed, authed.statusCode);
+				}
+
+				//generate a new token for the user
+				Token.create({
+					userid: data.user.id,
+					pub: uuid.v4(),
+					secret: uuid.v4()
+				}).done(function(err,tkn){
+					if (err) {
+						ISE = StandardResponses.ServerError({dat:err});
+						return res.send(ISE, ISE.statusCode);
+					}
+
+					var authed = StandardResponses.OK({msg:"authentication successful", dat:tkn});
+					return res.send(authed, authed.statusCode); 
+				});
+			});
 		});
-	},
-
-	logout: function(req, res) {
-		req.session.authenticated = false;
-		delete req.session.user;
-		res.send("logged out", 200);
 	}
 };
 module.exports = UserController;

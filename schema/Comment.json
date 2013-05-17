@@ -1,0 +1,33 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Comment",
+	"description": "A comment on a posting",
+	"type": "object",
+	"properties": {
+		"id": {
+			"description": "The unique identifier of the post",
+			"type":"integer"
+		},
+		"userid": {
+			"description": "The identifier of the author of the post",
+			"type": "integer"
+		},
+		"postid": {
+			"description":"The identifier of the post which this comment is for",
+			"type":"integer"
+		},
+		"parentid": {
+			"description": "The identifier of the comment which this comment references",
+			"type":"integer"
+		},
+		"content": {
+			"description": "The content of the comment",
+			"type":"string"
+		},
+		"votes": {
+			"description": "The current net votes of the comment",
+			"type":"integer"
+		}
+	},
+	"required":["userid","postid","content"]
+}

@@ -1,0 +1,26 @@
+{
+	"$schema":"http://json-schema.org/draft-04/schema#",
+	"title":"Response Data",
+	"description":"standard response object",
+	"type":"object",
+	"properties":{
+		"statusCode": {
+			"type":"integer",
+			"description":"the http status code of the response"
+		},
+		"status": {
+			"type":"string",
+			"description":"a summary of the status indicating either success or failure",
+			"enum":["success","error"]
+		},
+		"message": {
+			"type":"string",
+			"description":"a message describing the response status"
+		},
+		"data": {
+			"type":["array","boolean","integer","number","null","object","string"],
+			"description":"the data requested if applicable"
+		}
+	},
+	"required":["statusCode","status"]
+}

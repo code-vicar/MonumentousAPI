@@ -3,13 +3,8 @@
 */
 module.exports = function (req, res, ok) {
 
-	//ensure there is a user in the session
-	if (!req.session.user) {
-		return noAccess(res);
-	}
-
 	//if the user is an admin we allow
-	if (req.session.user.admin) {
+	if (req.user && req.user.admin) {
 		return ok();
 	}
 
@@ -30,14 +25,22 @@ module.exports = function (req, res, ok) {
 			return serverError(res);
 		}
 
+		if (!cmt) {
+			return missingResource(res);
+		}
+
 		//check if the author matches the user in session
-		if (cmt.userid === req.session.user.id) {
+		if (cmt.userid === req.user.id) {
 			return ok();
 		}
 
 		//if we get here then they don't have access
 		return noAccess(res);
 	});
+};
+
+var missingResource = function(res) {
+	return res.send("Resource not found", 404);
 };
 
 var noAccess = function(res) {

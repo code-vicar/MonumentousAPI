@@ -5,32 +5,33 @@
 */
 module.exports.policies = {
 
-  // Default policy (allow public access)
-  '*': 'authenticated',
+  // Default policy require an api key
+  '*': 'keyed',
 
+  // home controller is public, no keys
   'home': {
     '*': true
-  },
-
-  'user': {
-    'create': true,
-    'login': true,
-    'update': 'self',
-    'destroy': 'admin',
-    'find': 'admin',
-    'findAll': 'admin'
-  },
-
-  // need to be signed in to Create a comment
-  //   only the author of a comment
-  'comment': {
-    'destroy': 'commentAuthor',
-    'update': 'commentAuthor'
-  },
-
-  'post': {
-    'create': 'admin',
-    'destroy': 'admin',
-    'update': 'admin'
   }
+
+  // // user controller
+  // //  only updatable by logged in user, or admin
+  // 'user': {
+  //   'update': 'self',
+  //   'destroy': 'admin',
+  //   'find': 'admin',
+  //   'findAll': 'admin'
+  // },
+
+  // // need to be signed in to Create a comment
+  // //   only the author of a comment
+  // 'comment': {
+  //   'destroy': 'commentAuthor',
+  //   'update': 'commentAuthor'
+  // },
+
+  // 'post': {
+  //   'create': 'admin',
+  //   'destroy': 'admin',
+  //   'update': 'admin'
+  // }
 };

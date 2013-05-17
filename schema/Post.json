@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Post",
+	"description": "A posting in the blog",
+	"type": "object",
+	"properties": {
+		"id": {
+			"description": "The unique identifier of the post",
+			"type":"integer"
+		},
+		"userid": {
+			"description": "The author of the post",
+			"type": "integer"
+		},
+		"title": {
+			"description":"The title of the post",
+			"type":"string"
+		},
+		"content": {
+			"description": "The content of the post",
+			"type":"string"
+		}
+	},
+	"required":["userid","title","content"]
+}
