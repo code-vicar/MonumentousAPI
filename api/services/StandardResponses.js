@@ -36,13 +36,13 @@ var StandardResponses = {
 		};
 	},
 
-	RequireSignature: function(options) {
+	Unauthorized: function(options) {
 		var opts = parseOptions(options);
 
 		return {
 			"statusCode":401,
 			"status":"error",
-			"message": opts.msg || "please provide a signature",
+			"message": opts.msg || "unauthorized",
 			"data": opts.dat || null
 		};
 	},

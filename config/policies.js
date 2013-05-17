@@ -1,5 +1,5 @@
 /**
-* Policy defines middleware that is run before each controller/controller.
+* Policy defines middleware that is run before each controller/action.
 * Any policy dropped into the /middleware directory is made globally available through sails.middleware
 * Below, use the string name of the middleware
 */
@@ -11,27 +11,14 @@ module.exports.policies = {
   // home controller is public, no keys
   'home': {
     '*': true
+  },
+
+  'user': {
+    "login":true,
+    "create":["keyed","signed"],
+    "update":["keyed","signed"],
+    "destroy":["keyed","signed"],
+    "index":["keyed","signed"],
+    "find":["keyed","signed"]
   }
-
-  // // user controller
-  // //  only updatable by logged in user, or admin
-  // 'user': {
-  //   'update': 'self',
-  //   'destroy': 'admin',
-  //   'find': 'admin',
-  //   'findAll': 'admin'
-  // },
-
-  // // need to be signed in to Create a comment
-  // //   only the author of a comment
-  // 'comment': {
-  //   'destroy': 'commentAuthor',
-  //   'update': 'commentAuthor'
-  // },
-
-  // 'post': {
-  //   'create': 'admin',
-  //   'destroy': 'admin',
-  //   'update': 'admin'
-  // }
 };

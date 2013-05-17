@@ -4,13 +4,14 @@
     "version": "1.0.0",
     "description": "Monumentous API",
     "dependencies": {
-        "sails": "0.8.9-pre",
+        "sails": "0.8.91",
         "sails-mysql": "~0.7.7",
         "coffee-script": "~1.6.2",
         "db-migrate": "~0.4.1",
         "mysql": "~2.0.0-alpha7",
         "bcrypt": "~0.7.3",
-        "node-uuid":"~1.4.0"
+        "node-uuid":"~1.4.0",
+        "crypto":"~0.0.3"
     },
     "scripts": {
         "start": "node .app.js",

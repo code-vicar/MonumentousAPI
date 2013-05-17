@@ -5,10 +5,10 @@ var respond = function(err, data) {
 	var r;
 	if (err) {
 		r = StandardResponses.ServerError({msg:err});
-		this.res.send(r, r.statusCode);
+		return this.res.send(r, r.statusCode);
 	}
 	r = StandardResponses.OK({dat:data});
-	this.res.send(r, r.statusCode);
+	return this.res.send(r, r.statusCode);
 };
 
 var getJsonAsync = function(name, cb) {

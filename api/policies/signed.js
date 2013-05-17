@@ -1,39 +1,44 @@
+var crypto = require('crypto');
+
+//signature creation method
+var authSig = function(apiKey, apiSecret, sig) {
+	var timeStamp = Math.round(new Date().getTime()/1000);
+	//check a 5 minute variance on either side of the request
+	var timeStart = timeStamp - 300;
+	var apiKeyApiSecret = apiKey + apiSecret;
+	for(i = 0; i < 600; i++) {
+		timeStart += 1;
+		calcSig = crypto.createHash('md5').update('' + apiKeyApiSecret + timeStart + '').digest('hex');
+
+		if (calcSig === sig) {
+			return true;
+		}
+	}
+
+  return false;
+}
+
 /**
-* Allow any authenticated user.
+* Expect that the 'keyed' policy has already been executed
+* Allow any signed request.
 */
 module.exports = function (req, res, ok) {
-	
-	var authToken = req.param("authToken");
-	var authTokenHash = req.param("authTokenHash");
-	var authTS = req.param("epoch");
+	var sig = req.param('sig');
 
-	Tokens.find(authToken).done(function(err, tkn) {
-		if (err) {
-			return res.send("server error", 500);
-		}
-		if (!tkn) {
-			return res.send("invalid token", 403);
-		}
+	if (!sig) {
+		var ISE = StandardResponses.Unauthorized({msg:"please provide a signature in 'sig'"});
+		return res.send(ISE,ISE.statusCode);
+	}
 
-		var secret = tkn.secret;
+	var apiKey = req.tkn.pub;
+	var apiKeySecret = req.tkn.secret;
 
-		var serverHash = hash(authToken + secret + epoch);
+	var isAuth = authSig(apiKey, apiKeySecret, sig);
 
-		if (authTokenHash !== serverHash) {
-			return res.send("invalid token", 403);
-		}
+	if (!isAuth) {
+		var UA = StandardResponses.Unauthorized({msg:"Invalid signature"});
+		return res.send(UA,UA.statusCode);
+	}
 
-		//they are who they say they are.
-		User.find(tkn.userid).done(function(err, usr) {
-			if (err) {
-				return res.send("server error", 500);
-			}
-
-			req.user = usr;
-			return ok();
-		});
-	});
+	return ok();
 };
-
-//placeholder, we need a hashing function.
-function hash(){}
