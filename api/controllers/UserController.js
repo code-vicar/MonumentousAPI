@@ -69,7 +69,20 @@ var UserController = {
 		});
 	},
 	index:function(req,res) {
-		User.findAll().done(function(err, usrs) {
+		var uname = req.param("username");
+		var email = req.param("email");
+
+		var filter = {};
+
+		if (uname) {
+			filter.username = uname;
+		}
+
+		if (email) {
+			filter.email = email;
+		}
+
+		User.findAll(filter).done(function(err, usrs) {
 			if (err) {
 				var ISE = StandardResponses.ServerError({dat:err});
 				return res.send(ISE,ISE.statusCode);

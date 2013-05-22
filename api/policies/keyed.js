@@ -1,3 +1,8 @@
+//policy chaining on all routes "*" isn't working yet
+//temporarily call the 'filterParams' policy from the 'keyed' policy
+// until we can chain them together properly
+//var filterParams = require('./filterParams');
+
 /**
 * Expect an API Key
 * Allow any valid api key

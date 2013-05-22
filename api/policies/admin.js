@@ -3,11 +3,19 @@
 */
 module.exports = function (req, res, ok) {
 	
-	// User is allowed, proceed to controller
-	if (req.user && req.user.admin) {
+	User.find(req.tkn.userid).done(function(err,usr) {
+		if (err) {
+			return res.send(err);
+		}
+
+		if (!usr) {
+			return res.send("404");	
+		}
+
+		if (!usr.admin) {
+			return res.send("Unauthorized");
+		}
+
 		return ok();
-	}
-	
-	// User is not allowed
-	return res.send("You are not permitted to perform this action.", 403);
+	});
 };

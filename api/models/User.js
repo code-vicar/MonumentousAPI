@@ -10,15 +10,13 @@ module.exports = {
 	attributes: {
 
 		// Simple attribute:
-		username: 'STRING',
-		password: 'STRING',
-		email: 'STRING'
-
-		// Or for more flexibility:
-		// phoneNumber: {
-		//	type: 'STRING',
-		//	defaultValue: '555-555-5555'
-		// }
+		username: 'string',
+		password: 'string',
+		email: 'string',
+		admin: {
+			type:'boolean',
+			defaultsTo:0
+		}
 		
 	},
 
