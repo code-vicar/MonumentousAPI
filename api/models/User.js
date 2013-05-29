@@ -10,6 +10,7 @@ module.exports = {
 	attributes: {
 
 		// Simple attribute:
+		id:'integer',
 		username: 'string',
 		password: 'string',
 		email: 'string',

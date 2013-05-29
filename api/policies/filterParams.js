@@ -7,7 +7,6 @@ module.exports = function (req, res, ok) {
 	//req.params.param_filter=true;
 
 	//check the controller/action to see if we need to filter the parameters even more
-
 	var model = sails.models[req.params.entity];
 	if (model && model.filterParamsByAction) {
 		req = model.filterParamsByAction(req);

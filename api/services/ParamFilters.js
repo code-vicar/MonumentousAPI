@@ -26,12 +26,16 @@ var ParamFilters = {
 
 		// remove the attributes which are not in the model
 		// (but leave 'where', 'limit', 'skip', and 'sort' alone)
-		return _.extend({
+		var tmp = {
 			where: params.where,
 			limit: params.limit,
 			sort: params.sort,
 			skip: params.skip
-		}, Model.filter(params));
+		};
+		//console.log(params);
+		params = Model.filter(params);
+		//console.log(params);
+		return Merge.fn(params,tmp);
 	}
 }
 
