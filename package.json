@@ -18,6 +18,6 @@
         "debug": "node debug .app.js"
     },
     "main": ".app.js",
-    "repository": "git@bitbucket.org:code_vicar/monumentous.git",
+    "repository": "https://github.com/code-vicar/MonumentousAPI.git",
     "author": "Scott Vickers"
 }
