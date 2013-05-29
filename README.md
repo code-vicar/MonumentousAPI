@@ -1,19 +1,15 @@
 # Monumentous API!
-## a dedicated api server for my monumentous sites
+## an api for my monumentous sites
 ---
 
-RESTful Resources:
+Resources:
 # User
 * /User
 * /User/Login
 
-# Chat
-* /Chat/Message
-
 # The Slog
-* /Slog/Post
-* /Slog/Comment
+* /Post
+* /Comment
 
-# The Game (subject to change)
-* /Game/World
-* /Game/Entity
+Check out this site for documentation
+http://explore.api.mon.umento.us
